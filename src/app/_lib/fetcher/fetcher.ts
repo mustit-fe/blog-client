@@ -114,6 +114,11 @@ const getArticleLikeInfo = async (articleId: string): Promise<LikeInfoDto> => {
   return response.json();
 }
 
+const getArticleComment = async (articleId: string): Promise<any> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/${articleId}/comment`,{credentials: 'include'});
+  return response.json();
+}
+
 const API = {
   fetchArticles,
   fetchArticle,
