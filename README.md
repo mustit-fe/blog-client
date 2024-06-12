@@ -5,7 +5,7 @@
 - 도커 이미지 빌드
 
 1. .env 수정
-   - NEXT_PUBLIC_API_URL=http://localhost:9900 -> NEXT_PUBLIC_API_URL=http://localhost:80
+   - NEXT_PUBLIC_API_URL=http://localhost:9900 -> NEXT_PUBLIC_API_URL=http://host.docker.internal:80
 2. docker build . -t blog-client
 
 - 도커 컨테이너 실행
