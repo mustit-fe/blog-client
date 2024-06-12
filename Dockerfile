@@ -1,17 +1,14 @@
 # Stage 1: Build the application
 FROM node:20.14-alpine as builder
 
-# Set working directory
+# Set working directory for the builder stage
 WORKDIR /blog-client
 
-# Copy only the package.json and package-lock.json to the working directory
-COPY package*.json ./
+# Copy all files to the working directory
+COPY . .
 
 # Install dependencies
 RUN npm install
-
-# Copy the rest of the application files to the working directory
-COPY . .
 
 # Build the application
 RUN npm run build
@@ -19,7 +16,7 @@ RUN npm run build
 # Stage 2: Create the final image
 FROM node:20.14-alpine as runner
 
-# Set working directory
+# Set working directory for the runner stage
 WORKDIR /blog-client
 
 # Copy only the necessary files from the builder stage

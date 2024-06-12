@@ -10,4 +10,4 @@
 
 - 도커 컨테이너 실행
 
-1. docker run -d --name blog-client -p 3000:3000 blog-client:latest
+1. docker run -it --name blog-client -p 3000:3000 blog-client:latest
