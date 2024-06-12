@@ -7,7 +7,8 @@ import {
   Division,
   IResponse,
   User,
-  LikeInfoDto
+  LikeInfoDto,
+  CommentDto
 } from '@/app/_constants/types/types';
 
 const fetchArticles = async ({ page, offset, keyword }: ArticlesGet): Promise<ArticlesResponse> => {
@@ -114,9 +115,29 @@ const getArticleLikeInfo = async (articleId: string): Promise<LikeInfoDto> => {
   return response.json();
 }
 
-const getArticleComment = async (articleId: string): Promise<any> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/${articleId}/comment`,{credentials: 'include'});
+const getArticleComments = async (articleId: string): Promise<IResponse<CommentDto[]>> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/${articleId}/comments`,{credentials: 'include'});
   return response.json();
+}
+
+const createArticleComment = async (articleId: string, content: string, parentId?:number): Promise<IResponse<CommentDto[]>> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/${articleId}/comment`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ content, parentId}),
+    credentials: 'include',
+  });
+  return response.json();
+}
+
+const updateArticleComment = async (articleId: string, comment: string): Promise<any> => {
+  
+}
+
+const deleteArticleComment = async (articleId: string, commentId: string): Promise<any> => {
+
 }
 
 const API = {
@@ -130,7 +151,9 @@ const API = {
   likeArticle,
   unlikeArticle,
   myArticles,
-  getArticleLikeInfo
+  getArticleLikeInfo,
+  getArticleComments,
+  createArticleComment
 };
 
 export default API;

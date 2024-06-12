@@ -98,3 +98,22 @@ export interface LikeInfoDto {
   likes: number;
   isLiked: boolean;  
 }
+
+export interface CommentDto {
+  id: number;
+  articleId: number;
+  authorId: number;
+  author: authorDto;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface authorDto {
+  username: string;
+  email: string;
+  division: Division;
+  createdAt: string;
+  updatedAt: string;
+}
+

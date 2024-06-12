@@ -21,7 +21,7 @@ export default async function ArticleDetailPage({ params: { id } }: Props) {
         }} />
         <SnsShare params={{title: article.title}}/>
       </div>
-      <CommentBox/>
+      <CommentBox params={{articleId: id}}/>
     </main>
   );
 }

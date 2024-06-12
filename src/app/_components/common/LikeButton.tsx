@@ -15,7 +15,7 @@ interface Props {
   };
 }
 
-function LikeButton({params: {articleId} }: Props) {
+function LikeButton({params: {articleId}}: Props) {
     const [cookie, setCookie] = useCookies([BLOG_USER_NAME]);
     const [likeYn, setLikeYn] = useState(false);
     const [likesCount, setLikesCount] = useState(0);
