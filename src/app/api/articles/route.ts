@@ -1,4 +1,3 @@
-import { Article } from '@/app/_constants/types/types';
 import API from '@/app/_lib/fetcher/fetcher';
 import { getMDXs } from '@/app/_lib/utils/server/utils';
 
@@ -15,17 +14,7 @@ export async function GET(request: Request) {
   }));
   const mdxs = await getMDXs({ page, offset, keyword });
 
-  // if mdxs is not available
-  // if (!mdxs.articles || mdxs.articles.length < 1) {
-  //   return Response.json({
-  //     articles: null,
-  //     page: articles.page,
-  //     totalPage: articles.totalPage,
-  //     ...(keyword && { keyword }),
-  //   });
-  // }
-
-  const mdxConverted: Article[] = mdxs.articles.map(mdx => ({
+  const mdxConverted: any[] = mdxs.articles.map(mdx => ({
     type: 'mdx',
     id: mdx.slug,
     author: {

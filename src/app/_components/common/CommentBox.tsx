@@ -12,7 +12,7 @@ interface Props {
 } 
 
 const CommentBox = ({params: {articleId}}: Props) => {
-  const [cookie, setCookie] = useCookies([BLOG_USER_NAME]);
+  const [cookie, _] = useCookies([BLOG_USER_NAME]);
   const [comments, setComments] = useState<CommentDto[]>([]); // Specify the type of 'comments' as an array of 'Comment' objects
   const [content, setContent] = useState('');
   const [commentCnt, setCommentCnt] = useState(0);
@@ -62,7 +62,7 @@ const CommentBox = ({params: {articleId}}: Props) => {
         ))}   
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default CommentBox;

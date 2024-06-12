@@ -48,7 +48,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: mdx.title,
-    authors: mdx.author,
     openGraph: {
       type: 'article',
       title: mdx.title,

@@ -29,7 +29,7 @@ export interface Article {
   createdAt: string;
   likes: number;
   isLiked: boolean;
-  rowContent: string;
+  rawContent: string;
   published: boolean;
   thumbnail: string | null;
   title: string;
@@ -44,7 +44,7 @@ export interface ArticleRow {
   content: string;
   createdAt: string;
   likes: number;
-  rowContent: string;
+  rawContent: string;
   published: boolean;
   thumbnail: string | null;
   title: string;
@@ -62,7 +62,7 @@ export interface ArticlesResponse {
 export interface ArticlePost {
   title: string;
   content: string;
-  rowContent: string;
+  rawContent: string;
   thumbnail?: string;
   published?: boolean;
 }
@@ -96,7 +96,7 @@ export interface IResponse<T> {
 
 export interface LikeInfoDto {
   likes: number;
-  isLiked: boolean;  
+  isLiked: boolean;
 }
 
 export interface CommentDto {
