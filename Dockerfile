@@ -27,7 +27,7 @@ COPY --from=builder /blog-client/.next ./.next
 COPY --from=builder /blog-client/public ./public
 COPY --from=builder /blog-client/package*.json ./
 COPY --from=builder /blog-client/next.config.js ./
-COPY --from=builder /blog-client/.env ./.env
+COPY --from=builder /blog-client/.env.local ./.env.local
 
 # Install only production dependencies
 RUN npm install --production
