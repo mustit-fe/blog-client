@@ -1,34 +1,48 @@
-# Stage 1: Build the application
-FROM node:20.14-alpine as builder
+# Stage 1: Install dependencies
+FROM node:20-alpine AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+RUN \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
 
-# Set working directory for the builder stage
-WORKDIR /blog-client
-
-# Copy all files to the working directory
+# Stage 2: Build the application
+FROM deps AS builder
+WORKDIR /app
 COPY . .
+RUN \
+  if [ -f yarn.lock ]; then yarn run build; \
+  elif [ -f package-lock.json ]; then npm run build; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
 
-# Install dependencies
-RUN npm install
+# Stage 3: Production image
+FROM node:20-alpine AS runner
+WORKDIR /app
 
-# Build the application
-RUN npm run build
+ENV NODE_ENV production
 
-# Stage 2: Create the final image
-FROM node:20.14-alpine as runner
+# Add a non-root user for security reasons
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
-# Set working directory for the runner stage
-WORKDIR /blog-client
+# Copy only necessary files from the builder stage
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 
-# Copy only the necessary files from the builder stage
-COPY --from=builder /blog-client/.next ./.next
-COPY --from=builder /blog-client/public ./public
-COPY --from=builder /blog-client/package*.json ./
-COPY --from=builder /blog-client/next.config.mjs ./
-COPY --from=builder /blog-client/.env.local ./.env.local
+# Set the correct permissions
+RUN chown -R nextjs:nodejs /app/.next
 
-# Install only production dependencies
-RUN npm install --production
+# Switch to the non-root user
+USER nextjs
 
-# Expose the port and set the entry point
+# Expose port 3000
 EXPOSE 3000
-CMD ["npm", "start"]
+
+# Start the Next.js server
+CMD ["node", "./.next/server.js"]
