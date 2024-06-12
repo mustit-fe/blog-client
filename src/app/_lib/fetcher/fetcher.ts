@@ -8,7 +8,7 @@ import {
   IResponse,
   User,
   LikeInfoDto,
-  CommentDto
+  CommentDto,
 } from '@/app/_constants/types/types';
 
 const fetchArticles = async ({ page, offset, keyword }: ArticlesGet): Promise<ArticlesResponse> => {
@@ -111,34 +111,34 @@ const unlikeArticle = async (articleId: string, userId: string): Promise<IRespon
 };
 
 const getArticleLikeInfo = async (articleId: string): Promise<LikeInfoDto> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/${articleId}/likeinfo`,{credentials: 'include'});
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/${articleId}/likeinfo`, {
+    credentials: 'include',
+  });
   return response.json();
-}
+};
 
 const getArticleComments = async (articleId: string): Promise<IResponse<CommentDto[]>> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/${articleId}/comments`,{credentials: 'include'});
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/${articleId}/comments`, {
+    credentials: 'include',
+  });
   return response.json();
-}
+};
 
-const createArticleComment = async (articleId: string, content: string, parentId?:number): Promise<IResponse<CommentDto[]>> => {
+const createArticleComment = async (
+  articleId: string,
+  content: string,
+  parentId?: number
+): Promise<IResponse<CommentDto[]>> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/${articleId}/comment`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ content, parentId}),
+    body: JSON.stringify({ content, parentId }),
     credentials: 'include',
   });
   return response.json();
-}
-
-const updateArticleComment = async (articleId: string, comment: string): Promise<any> => {
-  
-}
-
-const deleteArticleComment = async (articleId: string, commentId: string): Promise<any> => {
-
-}
+};
 
 const API = {
   fetchArticles,
@@ -153,7 +153,7 @@ const API = {
   myArticles,
   getArticleLikeInfo,
   getArticleComments,
-  createArticleComment
+  createArticleComment,
 };
 
 export default API;
