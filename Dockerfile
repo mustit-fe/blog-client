@@ -4,13 +4,13 @@ FROM node:20.14-alpine as builder
 # Set working directory
 WORKDIR /blog-client
 
-# Copy package.json and package-lock.json (or yarn.lock) to the working directory
+# Copy only the package.json and package-lock.json to the working directory
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application files
+# Copy the rest of the application files to the working directory
 COPY . .
 
 # Build the application
@@ -22,7 +22,7 @@ FROM node:20.14-alpine as runner
 # Set working directory
 WORKDIR /blog-client
 
-# Copy only necessary files from the builder stage
+# Copy only the necessary files from the builder stage
 COPY --from=builder /blog-client/.next ./.next
 COPY --from=builder /blog-client/public ./public
 COPY --from=builder /blog-client/package*.json ./
@@ -31,7 +31,7 @@ COPY --from=builder /blog-client/next-i18next.config.js ./
 COPY --from=builder /blog-client/.env ./.env
 
 # Install only production dependencies
-RUN npm ci --omit=dev
+RUN npm install --production
 
 # Expose the port and set the entry point
 EXPOSE 3000
