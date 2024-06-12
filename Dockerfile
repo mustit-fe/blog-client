@@ -27,7 +27,6 @@ COPY --from=builder /blog-client/.next ./.next
 COPY --from=builder /blog-client/public ./public
 COPY --from=builder /blog-client/package*.json ./
 COPY --from=builder /blog-client/next.config.js ./
-COPY --from=builder /blog-client/next-i18next.config.js ./
 COPY --from=builder /blog-client/.env ./.env
 
 # Install only production dependencies
