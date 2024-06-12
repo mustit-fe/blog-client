@@ -3,7 +3,7 @@ FROM node:20.14 as builder
 WORKDIR /app
 
 # Copy all files and install dependencies
-COPY . .
+COPY . /app
 RUN npm install
 RUN npm run build
 
