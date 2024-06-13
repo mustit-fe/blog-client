@@ -91,7 +91,7 @@ const Icon = {
   ),
   AddPhoto: ({ editor }: { editor: Editor }) => {
     const uploadBucket = async (formData: FormData) => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SELF_URL}/api/upload`, {
+      const response = await fetch(`/api/upload`, {
         method: 'POST',
         body: formData,
       });
