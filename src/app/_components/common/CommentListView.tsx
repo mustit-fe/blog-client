@@ -42,7 +42,7 @@ const CommentListView = ({comments, userId, setComments, setCommentCnt}: Comment
   }
   return (
     <>
-      {comments.map((comment, idx) => (
+      {comments?.map((comment, idx) => (
         <div key={comment.id} className='mt-[15px]'>
           <div className='flex justify-between items-center'>
             <div className='flex flex-col mb-[10px]'>
