@@ -1,0 +1,1 @@
+export const PASSWORD_PLACEHOLDER = '8글자 이상의 비밀번호를 입력해주세요.';
