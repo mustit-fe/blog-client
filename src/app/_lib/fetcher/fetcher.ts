@@ -71,7 +71,7 @@ export const createArticle = async (article: ArticlePost): Promise<IResponse<Art
 
 const getArticles = async ({ page, offset, keyword }: ArticlesGet): Promise<any> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SELF_URL}/api/articles?page=${page}&offset=${offset}${keyword ? `&keyword=${keyword}` : ''}`
+    `/api/articles?page=${page}&offset=${offset}${keyword ? `&keyword=${keyword}` : ''}`
   );
   return response.json();
 };
