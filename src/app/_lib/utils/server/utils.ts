@@ -2,7 +2,7 @@ import matter from 'gray-matter';
 import path from 'path';
 import fs from 'fs/promises';
 import { recursiveReadDir } from 'next/dist/lib/recursive-readdir';
-import { GetMDXsResponse, MDX, MDXMeta } from '@/app/_constants/types/types';
+import { Article, GetMDXsResponse, MDX, MDXMeta } from '@/app/_constants/types/types';
 
 export interface GetMDXsProps {
   page: number;
@@ -75,3 +75,36 @@ export const getMDX = async (fileName: string): Promise<MDX> => {
 
   return { ...mdxMeta, body: content, slug } as MDX;
 };
+
+export function convertMDXToArticle(mdxs: GetMDXsResponse): Article[] {
+  const converted: Article[] = mdxs.articles.map(mdx => ({
+    type: 'mdx',
+    id: mdx.slug,
+    author: {
+      id: 9999999999,
+      email: '',
+      username: mdx.author,
+      division: 'frontend',
+    },
+    createdAt: mdx.date,
+    likes: 0,
+    isLiked: false,
+    rawContent: mdx.body,
+    published: mdx.isPublished ?? true,
+    thumbnail: mdx.thumbnail ?? null,
+    title: mdx.title,
+    updatedAt: mdx.date,
+    views: 0,
+    preview: mdx.body.slice(0, 200),
+  }));
+  return converted;
+}
+
+export function sortArticles(articles: Article[], mdxConverted: Article[]) {
+  const sorted = [...articles, ...mdxConverted].sort((a, b) => {
+    const aDate = new Date(a.createdAt);
+    const bDate = new Date(b.createdAt);
+    return aDate > bDate ? -1 : 1;
+  });
+  return sorted;
+}
