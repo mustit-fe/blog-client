@@ -9,8 +9,9 @@ import LoginForm from './LoginForm';
 import Dim from './Dim';
 import { useRouter } from 'next/navigation';
 import API from '@/app/_lib/fetcher/fetcher';
+import classNames from 'classnames';
 
-export default function LoginButton() {
+export default function LoginButton({ classes }: { classes?: string }) {
   const router = useRouter();
 
   const overlay = useOverlay();
@@ -59,26 +60,27 @@ export default function LoginButton() {
   if (!isClient) {
     return null;
   }
+  const className = classes ? 'cursor-pointer ' + classes : 'cursor-pointer';
 
   return (
     <>
       {!cookie.mustit_blog_username && (
-        <span onClick={openLogin} className="cursor-pointer">
+        <span className={className} onClick={openLogin}>
           로그인
         </span>
       )}
       {cookie.mustit_blog_username && (
-        <div className="flex gap-2 items-center">
-          <Link href="/write" className="px-2 py-1">
+        <>
+          <Link className={classNames('px-2 py-1', classes)} href="/write">
             글쓰기
           </Link>
-          <span className="cursor-pointer" onClick={() => router.push('/mypage')}>
-            <strong>{cookie.mustit_blog_username}</strong> 님
-          </span>
-          <button className="cursor-pointer" onClick={logout}>
+          <Link className={className} href="/mypage">
+            마이페이지
+          </Link>
+          <button className={className} onClick={logout}>
             로그아웃
           </button>
-        </div>
+        </>
       )}
     </>
   );
