@@ -13,7 +13,8 @@ import {
 
 const fetchArticles = async ({ page, offset, keyword }: ArticlesGet): Promise<ArticlesResponse> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/article?page=${page}&offset=${offset}${keyword ? `&keyword=${keyword}` : ''}`
+    `${process.env.NEXT_PUBLIC_API_URL}/article?page=${page}&offset=${offset}${keyword ? `&keyword=${keyword}` : ''}`,
+    {cache: 'no-store'}
   );
   return response.json();
 };
