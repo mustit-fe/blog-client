@@ -100,8 +100,8 @@ export interface LikeInfoDto {
 }
 
 export interface CommentDto {
-  id: number;
-  articleId: number;
+  id: string;
+  articleId: string;
   authorId: number;
   author: authorDto;
   content: string;
@@ -115,5 +115,12 @@ export interface authorDto {
   division: Division;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface CommentList {
+  comments: CommentDto[]; 
+  userId: string; 
+  setComments: Function; 
+  setCommentCnt: Function;
 }
 

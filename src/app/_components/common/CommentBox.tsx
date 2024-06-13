@@ -5,7 +5,8 @@ import { CommentDto } from '@/app/_constants/types/types';
 import API from '@/app/_lib/fetcher/fetcher';
 import { useCookies } from 'react-cookie';
 import { BLOG_USER_NAME } from '@/app/_constants/constant/constant';
-import dayjs from 'dayjs';
+import CommentListView from '@/app/_components/common/CommentListView';
+
 
 interface Props { 
   params: {articleId : string};
@@ -30,6 +31,10 @@ const CommentBox = ({params: {articleId}}: Props) => {
       alert('로그인이 필요한 서비스입니다. 로그인 후 시도해주세요.');
       return;
     }
+    if(!content.trim()){
+      alert('댓글 내용을 입력해주세요.');
+      return;
+    }
     API.createArticleComment(articleId, content).then((res) => {
       if(res.status === 200){
         setComments(res.data);
@@ -47,19 +52,13 @@ const CommentBox = ({params: {articleId}}: Props) => {
               placeholder='댓글을 입력해주세요.'
                  onChange={(e)=>setContent(e.target.value)}/>
       <div className='flex justify-end mt-[10px]'>
-        <button className='rounded-[5px] text-[15px] text-[#9e9fa2] border-[#bec1c6] border-solid border-[1px] w-[80px] h-[35px]' onClick={handleCommentSubmit}>댓글 작성</button>    
+        <button className='rounded-[5px] text-[12px] text-[#9e9fa2] border-[#bec1c6] border-solid border-[1px] w-[65px] h-[30px]' onClick={handleCommentSubmit}>댓글 작성</button>    
       </div>
       <div>
-        {comments.map((comment) => (
-          <div key={comment.id} className='mt-[15px]'>
-            <div className='flex flex-col mb-[10px]'>
-              <span className='font-bold text-[15px] text-[gray]'>{comment.author.username}</span>
-              <span className='text-[12px] text-[#c4c4c4]'>{dayjs(comment.createdAt).format('YYYY-MM-DD HH:mm')}</span>
-            </div>
-            <span className='text-[13px]'>{comment.content}</span>
-            <hr className='border-[1px] border-solid border-[#bec1c6] mt-[15px]' />
-          </div>
-        ))}   
+        <CommentListView comments={comments}
+                         userId={userId}
+                         setComments={setComments}
+                         setCommentCnt={setCommentCnt}/>
       </div>
     </div>
   );

@@ -132,12 +132,31 @@ const createArticleComment = async (articleId: string, content: string, parentId
   return response.json();
 }
 
-const updateArticleComment = async (articleId: string, comment: string): Promise<any> => {
-  
-}
+const modifyArticleComment = async (articleId: string, commentId: string , content: string): Promise<IResponse<CommentDto[]>> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/${articleId}/comment/${commentId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ content }),
+    credentials: 'include',
+  })
 
-const deleteArticleComment = async (articleId: string, commentId: string): Promise<any> => {
+  return response.json();  
+}  
 
+
+const deleteArticleComment = async (articleId: string, commentId: string): Promise<IResponse<CommentDto[]>> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/${articleId}/comment/${commentId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ commentId }),
+    credentials: 'include',
+  })
+
+  return response.json();
 }
 
 const API = {
@@ -153,7 +172,9 @@ const API = {
   myArticles,
   getArticleLikeInfo,
   getArticleComments,
-  createArticleComment
+  createArticleComment,
+  modifyArticleComment,
+  deleteArticleComment
 };
 
 export default API;
