@@ -5,7 +5,7 @@ interface Props {
   onClose: () => void;
   exit: () => void;
 }
-function LoginForm({ isOpen, onClose }: Props) {
+function Dim({ isOpen, onClose }: Props) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -15,4 +15,4 @@ function LoginForm({ isOpen, onClose }: Props) {
   );
 }
 
-export default LoginForm;
+export default Dim;
