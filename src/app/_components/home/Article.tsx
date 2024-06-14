@@ -1,4 +1,4 @@
-import { Article } from '@/app/_constants/types/types';
+import { Article, DivisionEnum } from '@/app/_constants/types/types';
 import { highlight, removeMarkdown } from '@/app/_lib/utils/client/utils';
 import dayjs from 'dayjs';
 import Image from 'next/image';
@@ -35,6 +35,7 @@ export default function ArticleItem({ article, keyword }: Props) {
           </p>
           <div className="flex space-x-2 text-sm text-slate-400">
             <span>{dayjs(article.createdAt).format('YYYY-MM-DD')}</span>
+            <span>{DivisionEnum[article.author?.division]}</span>
             <span className="font-bold">{article.author?.username}</span>
           </div>
         </div>
