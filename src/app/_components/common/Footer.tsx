@@ -6,7 +6,7 @@ import LoginButton from '@/app/_components/common/LoginButton';
 // import { useEffect, useState } from 'react';
 
 export default function Footer() {
-  const ulClasses = classNames('flex gap-x-2');
+  const ulClasses = classNames('flex gap-x-2 items-center');
   const strongClasses = classNames('font-bold text-themeBlue-500 w-32');
   const linkClasses = classNames('w-24 text-themeBlue-100 hover:font-semibold');
 

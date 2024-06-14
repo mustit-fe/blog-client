@@ -47,7 +47,7 @@ const Overlay = ({ isOpen, children }: Props) => {
           animate="animate"
           exit="exit"
           transition={{ duration: 0.2 }}
-          className="fixed w-full max-w-[450px] h-[400px] flex flex-col justify-center items-center rounded-2xl gap-8 bg-white shadow-lg z-50 p-8"
+          className="fixed w-full max-w-[550px] h-[450px] flex flex-col justify-center items-center rounded-2xl gap-8 bg-white shadow-lg z-50 p-8"
         >
           {children}
         </motion.div>
