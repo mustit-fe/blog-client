@@ -1,4 +1,12 @@
 export type Division = 'frontend' | 'backend' | 'devops' | 'mobile';
+
+export enum DivisionEnum {
+  frontend = 'FE',
+  backend = 'BE',
+  devops = 'DevOps',
+  mobile = 'App',
+}
+
 export interface MDXMeta {
   title: string;
   description: string;

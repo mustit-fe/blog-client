@@ -122,7 +122,7 @@ export default () => {
       <ToolBar editor={editor!} />
       <EditorContent editor={editor}></EditorContent>
       <button
-        className="fixed left-0 bottom-0 w-full h-14 bg-mustitBlack text-white font-bold text-lg"
+        className="fixed bottom-4 w-10/12 max-w-4xl h-14 bg-mustitBlack text-white font-bold text-lg rounded-md"
         onClick={handleSubmit}
       >
         등록

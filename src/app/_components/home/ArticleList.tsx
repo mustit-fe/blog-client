@@ -6,7 +6,7 @@ import { ArticlesResponse } from '@/app/_constants/types/types';
 import ArticleItem from './Article';
 import ViewObserver from '../common/ViewObserver';
 import { ARTICLE_LIST_OFFSET } from '@/app/_constants/constant/constant';
-import LinkButton from '@/app/_components/common/LinkButton';
+import Warning from '@/app/_components/common/Warning';
 
 interface Props {
   initial: ArticlesResponse;
@@ -45,14 +45,7 @@ export default function ArticleList({ initial, keyword }: Props) {
         {data.articles?.map(article => <ArticleItem article={article} key={article.title} keyword={data.keyword} />)}
         <ViewObserver onView={next} onHide={null} />
       </ul>
-      {data.articles?.length <= 0 && (
-        <section className="text-center">
-          <p className="text-themeBlue-500">글이 없습니다.</p>
-          <LinkButton href="/" classes="mt-8 px-4 text-themeBlue-100 text-xl">
-            메인으로 돌아가기
-          </LinkButton>
-        </section>
-      )}
+      {data.articles?.length <= 0 && <Warning title="글이 없습니다." buttonText="메인으로 돌아가기" buttonHref="/" />}
     </main>
   );
 }

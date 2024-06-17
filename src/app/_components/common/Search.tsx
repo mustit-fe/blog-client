@@ -32,7 +32,7 @@ export default function Search() {
     <form className="flex justify-center items-center gap-2" onSubmit={onSubmit}>
       <FontAwesomeIcon
         icon={faMagnifyingGlass}
-        className="h-6 cursor-pointer"
+        className="h-6 cursor-pointer text-themeBlue-100"
         onClick={e => {
           if (keyword && inputMode) onSubmit(e);
           else setInputMode(prev => !prev);

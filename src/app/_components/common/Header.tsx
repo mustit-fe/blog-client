@@ -1,7 +1,6 @@
 import Link from 'next/dist/client/link';
 import Image from 'next/image';
 import Search from './Search';
-import LoginButton from './LoginButton';
 
 export default function Header() {
   return (
@@ -22,9 +21,8 @@ export default function Header() {
             href="https://mustit-recruit.notion.site"
             className="border border-gray-500 text-themeBlue-500 hover:bg-themeBlue-100 hover:text-white hover:border-transparent text-md font-semibold py-1 px-4 rounded-md"
           >
-            채용 공고
+            채용
           </Link>
-          <LoginButton />
         </div>
       </div>
     </header>

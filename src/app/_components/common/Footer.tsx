@@ -2,10 +2,11 @@
 
 import Link from 'next/link';
 import classNames from 'classnames';
+import LoginButton from '@/app/_components/common/LoginButton';
 // import { useEffect, useState } from 'react';
 
 export default function Footer() {
-  const ulClasses = classNames('flex gap-x-2');
+  const ulClasses = classNames('flex gap-x-2 items-center');
   const strongClasses = classNames('font-bold text-themeBlue-500 w-32');
   const linkClasses = classNames('w-24 text-themeBlue-100 hover:font-semibold');
 
@@ -30,13 +31,13 @@ export default function Footer() {
       className={`flex flex-col space-y-8 w-full h-max pt-20 px-8 pb-16 sm:pb-24`}
     >
       <nav className="flex flex-col gap-y-2">
-        <ul className={ulClasses}>
+        <section className={ulClasses}>
           <strong className={strongClasses}>머스트잇 테크</strong>
           <Link className={linkClasses} href="/contact">
             의견 보내기
           </Link>
-        </ul>
-        <ul className={ulClasses}>
+        </section>
+        <section className={ulClasses}>
           <strong className={strongClasses}>머스트잇</strong>
           <Link className={linkClasses} href="https://corp.mustit.co.kr/">
             홈페이지
@@ -47,7 +48,8 @@ export default function Footer() {
           >
             채용
           </Link>
-        </ul>
+          <LoginButton classes={linkClasses} />
+        </section>
       </nav>
       <div className="flex flex-col gap-y-1">
         <strong className="text-themeBlue-500">(주)머스트잇</strong>
