@@ -56,7 +56,7 @@ const CommentListView = ({comments, userId, setComments, setCommentCnt}: Comment
               </div>
             ) : <></>}
           </div>
-          <p id={`comment-content-${comment.id}`} className='text-[13px]'>{comment.content}</p>
+          <p id={`comment-content-${comment.id}`} className='text-[13px] whitespace-pre'>{comment.content}</p>
           <div id={`comment-modify-${comment.id}`} className='hidden'>
             <textarea className='mt-[5px] border-[1px] border-solid border-[#bec1c6] rounded-[5px] p-[10px] h-[100px] w-full resize-none'
                     placeholder='수정할 내용을 입력해주세요.'/>
