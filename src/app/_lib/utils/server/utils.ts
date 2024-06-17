@@ -100,8 +100,17 @@ export function convertMDXToArticle(mdxs: GetMDXsResponse): Article[] {
   return converted;
 }
 
-export function sortArticles(articles: Article[], mdxConverted: Article[]) {
-  const sorted = [...articles, ...mdxConverted].sort((a, b) => {
+// export function sortArticles(articles: Article[], mdxConverted: Article[]) {
+//   const sorted = [...articles, ...mdxConverted].sort((a, b) => {
+//     const aDate = new Date(a.createdAt);
+//     const bDate = new Date(b.createdAt);
+//     return aDate > bDate ? -1 : 1;
+//   });
+//   return sorted;
+// }
+
+export function sortArticles(articles: Article[]) {
+  const sorted =articles.sort((a, b) => {
     const aDate = new Date(a.createdAt);
     const bDate = new Date(b.createdAt);
     return aDate > bDate ? -1 : 1;
